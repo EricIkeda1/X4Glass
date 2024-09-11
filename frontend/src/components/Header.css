@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #f79c11;
+  width: 100%;  /* Faz o header cobrir a tela inteira */
+  height: 68px;  /* Altura fixa do header */
+  padding: 0;  /* Remove o padding para ajuste exato */
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 491px;  /* Define a largura do logo */
+  height: 68px;  /* Define a altura do logo */
+}
+
+.logo img {
+  width: 100%;  /* A imagem ocupa 100% da largura do logo */
+  height: 100%;  /* A imagem ocupa 100% da altura do logo */
+  object-fit: cover;  /* A imagem preenche o espaço sem distorção */
+}
+
+.title {
+  flex-grow: 1;  /* Faz o título ocupar o restante do espaço */
+  color: #ff4500;
+  font-size: 24px;
+  text-align: center;  /* Centraliza o título horizontalmente */
+  margin-right: 20px;  /* Espaço entre o título e o fim da tela */
+}
