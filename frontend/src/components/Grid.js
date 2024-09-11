@@ -4,6 +4,8 @@ import './Grid.css';
 function Grid() {
   return (
     <div className="grid-container">
+      <div className="slider-item">Slider</div>
+      <div className="header-item">Header</div> 
       <div className="grid-item">Item 1</div>
       <div className="grid-item">Item 2</div>
       <div className="grid-item">Item 3</div>
