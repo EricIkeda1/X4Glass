@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperlândia</title>
+    <link rel=4"stylesheet" href="{% static 'style_home.css' %}">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/Logo Temperlandia.png' %}" alt="Temperlândia">
+        </div>
+    </header>
+
+    <!-- Contêiner do Slider Menu no centro da tela -->
+    <div class="slider-container">
+        <nav class="slider-menu" id="sliderMenu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+        </nav>
+
+        <!-- Botão para abrir o Slider Menu -->
+        <button class="menu-toggle" onclick="toggleMenu()">&#9776; Menu</button>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <section class="main-content" id="mainContent">
+        <div class="top-banner">
+            <img src="{% static 'images/banner.png' %}" alt="Banner" class="banner-img">
+        </div>
+        <div class="grid-container">
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const sliderMenu = document.getElementById("sliderMenu");
+            const mainContent = document.getElementById("mainContent");
+
+            if (sliderMenu.classList.contains("open")) {
+                sliderMenu.classList.remove("open");
+                mainContent.style.transform = "translateY(0)";
+            } else {
+                sliderMenu.classList.add("open");
+                mainContent.style.transform = "translateY(200px)";
+            }
+        }
+    </script>
+</body>
+</html>
