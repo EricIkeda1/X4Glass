@@ -14,68 +14,47 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaço entre o logo e o título */
+    justify-content: space-between;
     background-color: #FFA000;
     width: 100%;
     height: 68px;
     padding: 0 20px;
-    box-sizing: border-box;
 }
 
-/* Logo */
 .logo {
-    flex: 0 1 auto; /* Permite que o logo ocupe apenas o espaço necessário */
-    margin-right: auto; /* Garante que o logo fique no canto esquerdo */
+    flex: 0 1 auto;
 }
 
-/* Imagem do logo */
-.logo img {
-    height: 68px; /* Ajusta a altura da imagem */
+.menu-icon {
+    flex: 1;
 }
 
-/* Ajuste na altura e alinhamento do logo */
-.header-title h1 {
-    color: #FF5722;
-    font-size: 2.5rem;
+.menu-toggle {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #FFA000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
 }
 
-/* Título */
-.header-title {
-    flex: 1; /* Permite que o título ocupe o espaço restante */
-    text-align: center; /* Centraliza o texto dentro da área do título */
+.menu-toggle:hover {
+    background-color: #FF5722;
 }
 
-/* Imagem do logo */
-.logo img {
-    height: 68px; /* Ajusta a altura da imagem */
-}
-
-.header-title h1 {
-    color: #FF5722;
-    font-size: 2.5rem;
-}
-
-/* Contêiner do Slider Menu */
-.slider-container {
-    width: 100%;
-    background-color: #E0E0E0;
-    padding: 15px 0;
-    text-align: center;
-    position: relative;
-}
-
+/* Slider Menu */
 .slider-menu {
-    background-color: #FFF;
-    color: #111;
-    width: 70%;
-    margin: 0 auto;
-    height: 0;
-    overflow: hidden;
-    transition: height 0.5s ease;
+    position: fixed;
+    top: 68px;
+    left: -200px; /* Escondido fora da tela por padrão */
+    width: 200px;
+    height: 100%;
+    background-color: #FFC107;
+    transition: left 0.3s ease;
 }
 
 .slider-menu.open {
-    height: 200px; /* Altura do menu quando aberto */
+    left: 0; /* Mostra o menu quando aberto */
 }
 
 .slider-menu ul {
@@ -85,41 +64,20 @@ header {
 }
 
 .slider-menu ul li {
-    padding: 10px;
-}
-
-.slider-menu ul li a {
-    color: #111;
-    text-decoration: none;
-    font-size: 18px;
+    padding: 15px;
+    color: white;
 }
 
 .slider-menu ul li:hover {
-    background-color: #FFA000;
-}
-
-/* Botão de Toggle Menu */
-.menu-toggle {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #FFA000;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    margin-top: 10px;
-}
-
-.menu-toggle:hover {
-    background-color: #FF5722;
+    background-color: #FF9800;
 }
 
 /* Conteúdo principal */
 .main-content {
     padding: 20px;
-    transition: transform 0.5s ease; /* Animação suave de movimento do conteúdo */
+    transition: margin-left 0.3s ease;
 }
 
-/* Banner superior */
 .top-banner {
     display: flex;
     justify-content: center;
@@ -134,11 +92,11 @@ header {
     height: auto;
 }
 
-/* Grade de itens */
+/* Grid layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px; /* Ajustando o espaçamento entre os itens */
+    gap: 30px;
     padding: 20px;
 }
 
@@ -147,5 +105,5 @@ header {
     border: 1px solid #BDBDBD;
     border-radius: 8px;
     padding: 20px;
-    height: 200px; /* Altura ajustada */
+    height: 200px;
 }
