@@ -62,6 +62,10 @@ header {
     margin: 0;
 }
 
+.slider-menu ul li:first-child {
+    margin-top: 10px;
+}
+
 .slider-menu ul li {
     display: flex; 
     justify-content: space-between; 
