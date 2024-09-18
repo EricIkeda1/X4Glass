@@ -23,17 +23,32 @@ body {
 }
 
 .welcome-section {
-    background-color: #FFB300;
     padding: 20px;
     width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    background-color: transparent; 
+    position: relative;
+}
+
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFB300;
+    border-radius: 30px;
+    z-index: -1; 
+}
+
+.welcome-section h2 {
     color: white;
     font-size: 24px;
-    text-align: center;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    z-index: 1;
 }
 
 .form-section {
