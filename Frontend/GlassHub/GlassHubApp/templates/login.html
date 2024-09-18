@@ -15,7 +15,7 @@
         </div>
         <div class="form-section">
             <h2>Cadastre seus dados</h2>
-            <form method="POST">
+            <form method="POST" autocomplete="off"> <!-- Desativa autocomplete no formulário inteiro -->
                 {% csrf_token %}
                 <div class="input-group">
                     <i class="fas fa-user"></i>
@@ -23,11 +23,11 @@
                 </div>
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" name="email" required placeholder="Email" autocomplete="off"> 
+                    <input type="email" id="email" name="email" required placeholder="Email" autocomplete="new-email">
                 </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i> 
-                    <input type="password" id="password" name="password" required placeholder="Senha" autocomplete="off"> 
+                    <input type="password" id="password" name="password" required placeholder="Senha" autocomplete="new-password"> 
                 </div>
                 <button type="submit">Entrar</button>
             </form>
