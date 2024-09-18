@@ -118,51 +118,32 @@ header {
     transition: margin-left 0.3s ease;
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-align: center; 
-    font-weight: bold;
-    background-color: #e0e0e0; 
-    padding: 10px; 
-    border-radius: 8px; 
-    width: 60%; 
-    margin: 0 auto; 
+.top-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: #E9E9E9E9;
 }
 
-/* Table for process monitoring */
-.process-table {
+.banner-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Grid layout */
+.grid-container {
     display: grid;
-    grid-template-columns: 1fr; 
-    gap: 10px; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     padding: 20px;
 }
 
-.process-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    align-items: center;
-    border: 1px solid #ddd;
-}
-
-.process-row span {
-    font-size: 16px;
-}
-
-.status {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.success {
-    background-color: #4CAF50;
-}
-
-.fail {
-    background-color: #F44336;
+.grid-item {
+    background-color: #E9E9E9E9;
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    padding: 20px;
+    height: 200px;
 }

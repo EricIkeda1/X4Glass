@@ -20,5 +20,7 @@ from GlassHubApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', views.home, name='home'),  # URL raiz
+    path('home/', views.home, name='home'),  # URL /home
+    path('dashbord/', views.dashbord, name='dashbord'),  # URL /dashbord
 ]

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperlândia</title>
-    <link rel="stylesheet" href="{% static 'style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'style_dashbord.css' %}">
 </head>
 <body>
 
@@ -22,50 +22,17 @@
 
     <!-- Conteúdo principal -->
     <section class="main-content" id="mainContent">
-        <h2>Monitoramento do Processo de Produção</h2>
-        <div class="process-table">
-            <div class="process-row">
-                <span>Processo 1</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 2</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 3</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 4</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 5</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 6</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-            </div>
-            <div class="process-row">
-                <span>Processo 7</span>
-                <span class="status success"></span>
-                <span class="status success"></span>
-                <span class="status fail"></span>
-            </div>
+        <div class="top-banner">
+            <img src="{% static 'banner.png' %}" alt="Banner" class="banner-img">
+        </div>
+        <div class="grid-container">
+            <!-- Add content for each grid item -->
+            <div class="grid-item">Gráfico 1</div>
+            <div class="grid-item">Gráfico 2</div>
+            <div class="grid-item">Gráfico 3</div>
+            <div class="grid-item">Gráfico 4</div>
+            <div class="grid-item">Gráfico 5</div>
+            <div class="grid-item">Gráfico 6</div>
         </div>
     </section>
 
