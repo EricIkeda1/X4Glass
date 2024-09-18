@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Temperlândia | Login</title>
     <link rel="stylesheet" href="{% static 'style_login.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -15,7 +15,7 @@
         </div>
         <div class="form-section">
             <h2>Cadastre seus dados</h2>
-            <form method="POST" autocomplete="off"> <!-- Desativa autocomplete no formulário inteiro -->
+            <form method="POST" autocomplete="off"> 
                 {% csrf_token %}
                 <div class="input-group">
                     <i class="fas fa-user"></i>
