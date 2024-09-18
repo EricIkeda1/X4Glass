@@ -6,3 +6,7 @@ def home(request):
 
 def dashbord(request):
     return render(request, 'dashbord.html')
+
+def login(request):
+    return render(request, 'login.html')
+
