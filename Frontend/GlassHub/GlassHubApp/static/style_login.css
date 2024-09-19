@@ -26,10 +26,10 @@ body {
     padding: 20px;
     width: 40%;
     display: flex;
-    flex-direction: column; /* Organiza o conteúdo verticalmente */
-    justify-content: flex-start; /* Alinha o conteúdo ao topo */
+    flex-direction: column; 
+    justify-content: flex-start; 
     background-color: transparent; 
-    position: relative; /* Mantém a posição relativa */
+    position: relative; 
 }
 
 .welcome-section::before {
