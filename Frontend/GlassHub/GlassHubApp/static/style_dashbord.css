@@ -63,6 +63,7 @@ header {
     transition: left 0.3s ease;
     align-items: center; 
     justify-content: center;
+    overflow: hidden; 
 }
 
 .slider-menu.open {
