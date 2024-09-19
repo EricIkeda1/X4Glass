@@ -47,10 +47,10 @@ body {
 .welcome-section h2 {
     color: white;
     font-size: 24px;
-    position: relative; /* Adiciona posicionamento relativo */
-    top: 50px; /* Move o texto 5 cm (50px) para baixo */
-    left: 40px; /* Move o texto 1 cm (10px) para a direita */
-    z-index: 1; /* Garante que o texto fique acima do fundo */
+    position: relative; 
+    top: 50px; 
+    left: 40px; 
+    z-index: 1; 
 }
 
 .form-section {
@@ -66,13 +66,13 @@ body {
     text-align: center;
     margin-bottom: 20px;
     font-weight: normal;
-    margin-top: 30px; /* Ajuste conforme necessário */
+    margin-top: 30px;
 }
 
 .input-group {
     position: relative; 
     margin-bottom: 15px;
-    margin-top: 30px; /* Ajuste conforme necessário */
+    margin-top: 30px; 
 }
 
 .input-group i {
@@ -96,18 +96,17 @@ body {
 }
 
 button {
-    width: 100%; /* Faz com que o botão use toda a largura disponível */
-    padding: 12px; /* Aumenta o padding para tornar o botão maior */
+    width: 100%;
+    padding: 12px; 
     background-color: #FFB300;
     color: white;
     border: none;
-    border-radius: 25px; /* Aumenta o arredondamento para um estilo mais circular */
-    font-size: 16px; /* Ajusta o tamanho da fonte para um botão maior */
+    border-radius: 25px; 
+    font-size: 16px; 
     cursor: pointer;
-    margin-top: 30px; /* Ajuste conforme necessário */
-    display: block; /* Garante que o botão seja exibido como bloco */
-    margin-left: auto; /* Centraliza horizontalmente */
-    margin-right: auto; /* Centraliza horizontalmente */
+    margin-top: 30px; 
+    display: block; 
+    margin-left: auto; 
 }
 
 button:hover {
