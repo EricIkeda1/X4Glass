@@ -20,9 +20,12 @@ from GlassHubApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='monitoramento'), 
-    path('monitoramento/', views.home, name='monitoramento'), 
+    path('', views.monitoramento, name='monitoramento'), 
+    path('alarmes/', views.alarmes, name='alarmes'),
+    path('cadastro/', views.cadastro, name='cadastro'),
+    path('monitoramento/', views.monitoramento, name='monitoramento'), 
     path('dashbord/', views.dashbord, name='dashbord'),  
     path('login/', views.login, name='login'),
     path('faturamento/', views.faturamento, name='faturamento'),
+    path('parametrizacao/', views.parametrizacao, name='parametrizacao'),
 ]

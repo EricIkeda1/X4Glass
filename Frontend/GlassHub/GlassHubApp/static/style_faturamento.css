@@ -56,18 +56,18 @@ header {
 .slider-menu {
     position: fixed;
     top: 68px;
-    left: -200px;
+    left: -200px; /* Inicialmente fora da tela */
     width: 200px;
     height: 100%;
     background-color: #FFB41C;
-    transition: left 0.3s ease;
+    transition: left 0.3s ease; /* Tempo de transição */
     align-items: center; 
     justify-content: center;
     overflow: hidden; 
 }
 
 .slider-menu.open {
-    left: 0;
+    left: 0; /* O menu se move para dentro da tela */
 }
 
 .slider-menu ul {
@@ -111,5 +111,149 @@ header {
     color: #FFFFFF; 
     text-decoration: none; 
     width: 100%; 
+}
+
+/* Formulário de faturamento */
+.titulo-faturamento {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+.faturamento-container {
+    margin: 40px auto; /* Aumentei a margem superior e inferior */
+    padding: 40px; /* Aumentei o padding para dar mais espaçamento interno */
+    width: 100%;
+    max-width: 1600px; /* Aumentei a largura máxima do contêiner */
+    background-color: #F3F3F3; /* Cor do fundo do cartão */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra do cartão */
+}
+
+.faturamento-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Mantido layout de 4 colunas */
+    gap: 20px; /* Aumentei o espaço entre os elementos */
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    font-weight: bold;
+    margin-bottom: 10px; /* Aumentei o espaçamento abaixo dos rótulos */
+}
+
+.form-row input {
+    padding: 15px; /* Aumentei o padding dos campos de entrada */
+    font-size: 16px; /* Aumentei o tamanho da fonte dos campos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Status no Processo */
+.status-processo {
+    margin-top: 40px; /* Aumentei o espaçamento acima do status do processo */
+    text-align: center;
+}
+
+.status-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Aumentei o espaçamento acima dos indicadores */
+}
+
+.status-indicator {
+    width: 80px; /* Largura do retângulo */
+    height: 40px; /* Altura do retângulo */
+    margin: 0 10px; /* Espaçamento entre os indicadores */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.status-indicator.green {
+    background-color: green;
+}
+
+.status-indicator.yellow {
+    background-color: yellow;
+}
+
+.status-indicator.orange {
+    background-color: orange;
+}
+
+.status-indicator.red {
+    background-color: red;
+}
+
+/* Status no Processo */
+.status-processo {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.status-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.status-indicator {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    border-radius: 50%;
+}
+
+.status-indicator.green {
+    background-color: green;
+}
+
+.status-indicator.yellow {
+    background-color: yellow;
+}
+
+.status-indicator.orange {
+    background-color: orange;
+}
+
+.status-indicator.red {
+    background-color: red;
+}
+
+/* Status no Processo */
+.status-processo {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.status-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.status-indicator {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    border-radius: 50%;
+}
+
+.status-indicator.green {
+    background-color: green;
+}
+
+.status-indicator.yellow {
+    background-color: yellow;
+}
+
+.status-indicator.orange {
+    background-color: orange;
+}
+
+.status-indicator.red {
+    background-color: red;
 }
 

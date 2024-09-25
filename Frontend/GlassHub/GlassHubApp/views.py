@@ -1,8 +1,14 @@
 from django.shortcuts import render
 
 # Create your views here.
-def home(request):
+def monitoramento(request):
     return render(request, 'monitoramento.html')
+
+def alarmes(request):
+    return render(request, 'alarmes.html')
+
+def cadastro(request):
+    return render(request, 'cadastro.html')
 
 def dashbord(request):
     return render(request, 'dashbord.html')
@@ -12,3 +18,7 @@ def login(request):
 
 def faturamento(request):
     return render(request, 'faturamento.html')
+
+def parametrizacao(request):
+    return render(request, 'parametrizacao.html')
+

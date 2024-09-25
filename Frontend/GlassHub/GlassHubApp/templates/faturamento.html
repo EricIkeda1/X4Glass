@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperlândia | Faturamento</title>
     <link rel="stylesheet" href="{% static 'style_faturamento.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 </head>
 <body>
 
@@ -20,47 +24,141 @@
         </div>
     </header>
 
+    <!-- Menu lateral -->
+    <nav class="slider-menu" id="sliderMenu">
+        <ul>
+            <li><a href="{% url 'alarmes' %}">Alarmes</a></li>
+            <li><a href="{% url 'dashbord' %}">Dashbord</a></li>
+            <li><a href="{% url 'faturamento' %}">Faturamento</a></li>
+            <li><a href="{% url 'monitoramento' %}">Monitoramento</a></li>
+            <li><a href="{% url 'parametrizacao' %}">Parametrização</a></li>
+            <li><a href="{% url 'login' %}">Sair</a></li>
+        </ul>
+    </nav>
 
-<!-- Menu lateral -->
-<nav class="slider-menu" id="sliderMenu">
-    <ul>
-        <li><a href="{% url 'dashbord' %}">Dashbord</a></li>
-        <li><a href="{% url 'faturamento' %}">Faturamento</a></li>
-        <li><a href="{% url 'monitoramento' %}">Monitoramento</a></li>
-        <li><a href="#">Item 04</a></li>
-    </ul>
-</nav>
+    <!-- Formulário de Faturamento -->
+    <main id="mainContent">
+        <div class="faturamento-container">
+            <h2>Ordem de Faturamento</h2>
 
-<script>
-    function toggleMenu() {
-        const sliderMenu = document.getElementById("sliderMenu");
-        const mainContent = document.getElementById("mainContent");
+            <form class="faturamento-form">
+                <div class="form-row">
+                    <label for="setor">Setor:</label>
+                    <input type="text" id="setor" name="setor">
+                </div>
+                
+                <div class="form-row">
+                    <label for="peso">Peso:</label>
+                    <input type="text" id="peso" name="peso">
+                </div>
 
-        sliderMenu.classList.toggle("open");
+                <div class="form-row">
+                    <label for="larguraAltura">Largura x Altura:</label>
+                    <input type="text" id="larguraAltura" name="larguraAltura">
+                </div>
 
-        if (sliderMenu.classList.contains("open")) {
-            mainContent.style.marginLeft = "200px";
-        } else {
-            mainContent.style.marginLeft = "0";
+                <div class="form-row">
+                    <label for="codigoBarras">Código de Barras:</label>
+                    <input type="text" id="codigoBarras" name="codigoBarras">
+                </div>
+
+                <div class="form-row">
+                    <label for="itemTotal">Item de Total:</label>
+                    <input type="text" id="itemTotal" name="itemTotal">
+                </div>
+
+                <div class="form-row">
+                    <label for="chapa">Chapa:</label>
+                    <input type="text" id="chapa" name="chapa">
+                </div>
+
+                <div class="form-row">
+                    <label for="cliente">Cliente:</label>
+                    <input type="text" id="cliente" name="cliente">
+                </div>
+
+                <div class="form-row">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade">
+                </div>
+
+                <div class="form-row">
+                    <label for="operador">Operador:</label>
+                    <input type="text" id="operador" name="operador">
+                </div>
+
+                <div class="form-row">
+                    <label for="data">Data:</label>
+                    <input type="text" id="data" name="data">
+                </div>
+
+                <div class="form-row">
+                    <label for="base">Base:</label>
+                    <input type="text" id="base" name="base">
+                </div>
+
+                <div class="form-row">
+                    <label for="regiao">Região:</label>
+                    <input type="text" id="regiao" name="regiao">
+                </div>
+
+                <div class="form-row">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo">
+                </div>
+            </form>
+
+            <!-- Status no Processo -->
+            <div class="status-processo">
+                <h3>Status no Processo</h3>
+                <div class="status-indicators">
+                    <div class="status-indicator green"></div>
+                    <div class="status-indicator yellow"></div>
+                    <div class="status-indicator orange"></div>
+                    <div class="status-indicator red"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sliderMenu = $("#sliderMenu");
+            const mainContent = $("#mainContent");
+    
+            if (sliderMenu.hasClass("open")) {
+                sliderMenu.animate({ left: "-200px" }, 300, function() {
+                    sliderMenu.removeClass("open");
+                });
+                mainContent.animate({ marginLeft: "0" }, 300);
+            } else {
+                sliderMenu.animate({ left: "0" }, 300, function() {
+                    sliderMenu.addClass("open");
+                });
+                mainContent.animate({ marginLeft: "200px" }, 300);
+            }
         }
-    }
-
-    function updateDateTime() {
-        const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        const dateTimeString = `Data: ${day}/${month}/${year} Hora: ${hours}:${minutes}:${seconds}`;
-        document.getElementById("dateTime").innerText = dateTimeString;
-    }
-
-    setInterval(updateDateTime, 1000); 
-    updateDateTime();
-</script>
+    
+        $(function() {
+            // Atualiza o horário e data
+            setInterval(updateDateTime, 1000);
+            updateDateTime(); 
+        });
+    
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const dateTimeString = `Data: ${day}/${month}/${year} Hora: ${hours}:${minutes}:${seconds}`;
+            document.getElementById("dateTime").innerText = dateTimeString;
+        }
+    </script>
+    
 
 </body>
 </html>
