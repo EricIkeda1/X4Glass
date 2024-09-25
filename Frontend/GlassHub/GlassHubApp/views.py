@@ -10,3 +10,5 @@ def dashbord(request):
 def login(request):
     return render(request, 'login.html')
 
+def faturamento(request):
+    return render(request, 'faturamento.html')

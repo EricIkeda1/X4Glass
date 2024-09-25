@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperlândia | Faturamento</title>
+    <link rel="stylesheet" href="{% static 'style_faturamento.css' %}">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="menu-icon">
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776; Opções</button>
+        </div>
+        <div id="dateTime" class="date-time"></div> 
+        <div class="logo">
+            <img src="{% static 'images/Logo Temperlandia.png' %}" alt="Temperlândia">
+        </div>
+    </header>
+
+
+<!-- Menu lateral -->
+<nav class="slider-menu" id="sliderMenu">
+    <ul>
+        <li><a href="{% url 'dashbord' %}">Dashbord</a></li>
+        <li><a href="{% url 'faturamento' %}">Faturamento</a></li>
+        <li><a href="{% url 'monitoramento' %}">Monitoramento</a></li>
+        <li><a href="#">Item 04</a></li>
+    </ul>
+</nav>
+
+<script>
+    function toggleMenu() {
+        const sliderMenu = document.getElementById("sliderMenu");
+        const mainContent = document.getElementById("mainContent");
+
+        sliderMenu.classList.toggle("open");
+
+        if (sliderMenu.classList.contains("open")) {
+            mainContent.style.marginLeft = "200px";
+        } else {
+            mainContent.style.marginLeft = "0";
+        }
+    }
+
+    function updateDateTime() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const dateTimeString = `Data: ${day}/${month}/${year} Hora: ${hours}:${minutes}:${seconds}`;
+        document.getElementById("dateTime").innerText = dateTimeString;
+    }
+
+    setInterval(updateDateTime, 1000); 
+    updateDateTime();
+</script>
+
+</body>
+</html>
