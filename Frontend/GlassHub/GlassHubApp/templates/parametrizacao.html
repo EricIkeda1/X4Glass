@@ -31,61 +31,35 @@
         </ul>
     </nav>
 
-    <main id="mainContent">
-        <section class="parametrizacao-container">
-            <h2>Parametrização de Processos</h2>
+<main id="mainContent">
+    <section class="parametrizacao-container">
+        <h2>Parametrização de Processos</h2>
 
-            <!-- Tabela para os processos e tempos -->
-            <table class="parametrizacao-table">
-                <thead>
-                    <tr>
-                        <th>Processo</th>
-                        <th>Tempo Inicial</th>
-                        <th>Tempo Final</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" value="Processo 1" readonly></td>
-                        <td><input type="number" value="30"></td>
-                        <td><input type="number" value="60"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 2" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 3" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 4" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 5" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 6" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" value="Processo 7" readonly></td>
-                        <td><input type="number" value="20"></td>
-                        <td><input type="number" value="50"></td>
-                    </tr>
-                    <!-- Continue com as demais linhas -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-
+        <!-- Tabela para os processos e tempos com identificador para arraste -->
+        <table class="parametrizacao-table" id="dragTable">
+            <thead>
+                <tr>
+                    <th>Processo</th>
+                    <th>Tempo Inicial</th>
+                    <th>Tempo Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="draggable-row">
+                    <td><input type="text" value="Processo 1" readonly></td>
+                    <td><input type="number" value="30"></td>
+                    <td><input type="number" value="60"></td>
+                </tr>
+                <tr class="draggable-row">
+                    <td><input type="text" value="Processo 2" readonly></td>
+                    <td><input type="number" value="20"></td>
+                    <td><input type="number" value="50"></td>
+                </tr>
+                <!-- Continue com as demais linhas -->
+            </tbody>
+        </table>
+    </section>
+</main>
     <script>
         function toggleMenu() {
             const sliderMenu = document.getElementById("sliderMenu");
