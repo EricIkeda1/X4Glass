@@ -32,6 +32,60 @@
         </ul>
     </nav>
 
+    <!-- Conteúdo Principal -->
+    <main id="mainContent" class="main-content">
+        <div class="form-container">
+            <h2>Cadastro Usuário</h2>
+            <form>
+                <div class="row">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" required>
+                </div>
+        
+                <div class="row">
+                    <label for="sector">Setor de Trabalho:</label>
+                    <input type="text" id="sector" required>
+                </div>
+        
+                <div class="row">
+                    <label for="gender">Sexo:</label>
+                    <input type="text" id="gender" required>
+                </div>
+        
+                <div class="row">
+                    <label for="role">Função do Colaborador:</label>
+                    <input type="text" id="role" required>
+                </div>
+        
+                <div class="row">
+                    <label for="shift">Turno de Trabalho:</label>
+                    <input type="text" id="shift" required>
+                </div>
+        
+                <div class="row">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+        
+                <div class="row">
+                    <label for="password">Senha de Acesso:</label>
+                    <input type="password" id="password" required>
+                </div>
+        
+                <div class="row">
+                    <label for="confirm-password">Confirmação da Senha:</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+        
+                <div class="button-group">
+                    <button type="button" class="edit-button">Editar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+        
+    </main>
+
     <script>
         function toggleMenu() {
             const sliderMenu = document.getElementById("sliderMenu");
