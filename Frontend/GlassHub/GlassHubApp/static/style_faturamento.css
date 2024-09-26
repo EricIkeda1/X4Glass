@@ -56,18 +56,18 @@ header {
 .slider-menu {
     position: fixed;
     top: 68px;
-    left: -200px; /* Inicialmente fora da tela */
+    left: -200px; 
     width: 200px;
     height: 100%;
     background-color: #FFB41C;
-    transition: left 0.3s ease; /* Tempo de transição */
+    transition: left 0.3s ease; 
     align-items: center; 
     justify-content: center;
     overflow: hidden; 
 }
 
 .slider-menu.open {
-    left: 0; /* O menu se move para dentro da tela */
+    left: 0; 
 }
 
 .slider-menu ul {
@@ -115,24 +115,24 @@ header {
 
 /* Formulário de faturamento */
 .titulo-faturamento {
-    text-align: center; /* Centraliza o texto */
-    margin-bottom: 20px; /* Espaço abaixo do título */
+    text-align: center; 
+    margin-bottom: 20px;
 }
 
 .faturamento-container {
-    margin: 40px auto; /* Aumentei a margem superior e inferior */
-    padding: 40px; /* Aumentei o padding para dar mais espaçamento interno */
+    margin: 40px auto;
+    padding: 40px; 
     width: 100%;
-    max-width: 1600px; /* Aumentei a largura máxima do contêiner */
-    background-color: #F3F3F3; /* Cor do fundo do cartão */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra do cartão */
+    max-width: 1600px; 
+    background-color: #F3F3F3; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .faturamento-form {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Mantido layout de 4 colunas */
-    gap: 20px; /* Aumentei o espaço entre os elementos */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
 }
 
 .form-row {
@@ -142,33 +142,33 @@ header {
 
 .form-row label {
     font-weight: bold;
-    margin-bottom: 10px; /* Aumentei o espaçamento abaixo dos rótulos */
+    margin-bottom: 10px; 
 }
 
 .form-row input {
-    padding: 15px; /* Aumentei o padding dos campos de entrada */
-    font-size: 16px; /* Aumentei o tamanho da fonte dos campos */
+    padding: 15px;
+    font-size: 16px; 
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 /* Status no Processo */
 .status-processo {
-    margin-top: 40px; /* Aumentei o espaçamento acima do status do processo */
+    margin-top: 40px;
     text-align: center;
 }
 
 .status-indicators {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Aumentei o espaçamento acima dos indicadores */
+    margin-top: 20px;
 }
 
 .status-indicator {
-    width: 80px; /* Largura do retângulo */
-    height: 40px; /* Altura do retângulo */
-    margin: 0 10px; /* Espaçamento entre os indicadores */
-    border-radius: 5px; /* Bordas arredondadas */
+    width: 80px; 
+    height: 40px; 
+    margin: 0 10px;
+    border-radius: 5px;
 }
 
 .status-indicator.green {

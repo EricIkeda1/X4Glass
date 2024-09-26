@@ -5,7 +5,10 @@ def monitoramento(request):
     return render(request, 'monitoramento.html')
 
 def alarmes(request):
-    return render(request, 'alarmes.html')
+    context = {
+        'range': range(6),
+    }
+    return render(request, 'alarmes.html', context)
 
 def cadastro(request):
     return render(request, 'cadastro.html')

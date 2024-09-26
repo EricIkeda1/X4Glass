@@ -139,15 +139,15 @@ header {
 
 /* Tabela */
 .parametrizacao-table {
-    width: 80%; /* Largura da tabela aumentada */
+    width: 80%; 
     border-collapse: collapse;
-    margin-top: 30px; /* Maior espaçamento acima da tabela */
-    margin: 0 auto; /* Centralizar tabela */
+    margin-top: 30px; 
+    margin: 0 auto;
 }
 
 .parametrizacao-table th, .parametrizacao-table td {
     border: 1px solid #CCC;
-    padding: 20px; /* Aumentar o espaçamento interno das células */
+    padding: 20px; 
     text-align: center;
 }
 
@@ -160,19 +160,19 @@ header {
 .parametrizacao-table input[type="text"],
 .parametrizacao-table input[type="number"] {
     width: 90%;
-    padding: 10px; /* Aumentar o espaçamento interno dos inputs */
+    padding: 10px; 
     text-align: center;
     border: 1px solid #CCC;
     border-radius: 5px;
 }
 
 .parametrizacao-table input[readonly] {
-    background-color: #F0F0F0; /* Cor de fundo diferente para campos não editáveis */
-    cursor: not-allowed; /* Cursor indicando que não pode editar */
+    background-color: #F0F0F0; 
+    cursor: not-allowed;
 }
 
 .parametrizacao-table tr {
-    height: 50px; /* Aumentar o espaçamento entre as linhas */
+    height: 50px;
 }
 
 /* Maior espaçamento abaixo do título */

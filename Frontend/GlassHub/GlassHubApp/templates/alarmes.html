@@ -32,6 +32,34 @@
         </ul>
     </nav>
 
+    <!-- Conteúdo principal -->
+    <main id="mainContent">
+        <section class="alarm-section">
+            <h1>Alarmes</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Hora</th>
+                        <th>Código</th>
+                        <th>Descrição do Evento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range %}
+                    <tr>
+                        <td><input type="text" placeholder="Cliente"></td>
+                        <td><input type="text" placeholder="Hora"></td>
+                        <td><input type="text" placeholder="Código"></td>
+                        <td><input type="text" placeholder="Descrição do Evento"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+
     <script>
         function toggleMenu() {
             const sliderMenu = document.getElementById("sliderMenu");
