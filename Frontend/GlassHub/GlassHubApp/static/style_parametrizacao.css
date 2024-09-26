@@ -126,21 +126,6 @@ header {
     color: #000;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 20px;
-}
-
-.grid-item {
-    background-color: #E9E9E9E9;
-    border: 1px solid #BDBDBD;
-    border-radius: 8px;
-    padding: 20px;
-    height: 200px;
-}
-
 /* Parametrization Section */
 .parametrizacao-container {
     background-color: #F0F0F0;
