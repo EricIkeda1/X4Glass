@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperlândia | Login</title>
+    <title>Temperlândia | Registro</title>
     <link rel="stylesheet" href="{% static 'style_registro.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,17 +15,21 @@
             <h2>Bem-Vindo de Volta</h2>
         </div>
         <div class="form-section">
-            <h2>Faça seu Login</h2>
-            <form action="{% url 'login'%}" method="POST">{% csrf_token %}
+            <h2>Faça seu Cadastro</h2>
+            <form action="{% url 'registro'%}" method="POST">{% csrf_token %}
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="username" id="username" name="username" required placeholder="Nome"> 
                 </div>
                 <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required placeholder="Email">
+                </div>
+                <div class="input-group">
                     <i class="fas fa-lock"></i> 
                     <input type="password" id="password" name="password" required placeholder="Senha"> 
                 </div>
-                <input type="submit" class="submit-button" value="Entrar">
+                <input type="submit" class="submit-button" value="Cadastrar">
             </form>
         </div>
     </div>

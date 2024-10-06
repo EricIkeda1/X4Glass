@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 ROOT_URLCONF = 'GlassHub.urls'
 
 TEMPLATES = [
@@ -70,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'GlassHub.wsgi.application'
 
+LOGIN_URL = '/login/'  
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
