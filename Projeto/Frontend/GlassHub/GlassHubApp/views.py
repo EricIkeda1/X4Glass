@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
+from .models import CustomUser
 
 # Create your views here.
 @login_required
@@ -47,20 +48,30 @@ def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
     else:
-        username = request.POST.get('username')
-        password = request.POST.get('password')  
-        
-        user = authenticate(username=username, password=password)  
-    
+        username = request.POST.get('username')  # Obtém o nome de usuário
+        email = request.POST.get('email')        # Obtém o e-mail
+        password = request.POST.get('password')   # Obtém a senha
+
+        # Tenta autenticar usando o nome de usuário
+        user = authenticate(username=username, password=password)
+
+        # Se a autenticação falhar, tenta autenticar usando o e-mail
+        if not user:
+            try:
+                user = CustomUser.objects.get(email=email)  # Tenta encontrar o usuário pelo e-mail
+                user = authenticate(username=user.username, password=password)  # Autentica com o nome de usuário
+            except CustomUser.DoesNotExist:
+                user = None  # Se o usuário não existir, define como None
+
         if user:
-            login_django(request, user)  
+            login_django(request, user)
             print(f'User {username} logged in successfully.')
             return redirect('dashbord')  
         else:
             print('Invalid login attempt.')
-            messages.error(request, 'Email ou Senha inválidos')
+            messages.error(request, 'Nome, e-mail ou senha inválidos')
             return render(request, 'login.html')
-
+        
 @login_required        
 def faturamento(request):
     return render(request, 'faturamento.html')
