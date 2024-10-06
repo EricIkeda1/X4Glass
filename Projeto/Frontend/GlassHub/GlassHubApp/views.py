@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from .models import CustomUser
 
 # Create your views here.
@@ -71,6 +72,10 @@ def login(request):
             print('Invalid login attempt.')
             messages.error(request, 'Nome, e-mail ou senha inválidos')
             return render(request, 'login.html')
+        
+def logout_view(request):
+    logout(request)  # Desloga o usuário
+    return redirect('login')
         
 @login_required        
 def faturamento(request):
