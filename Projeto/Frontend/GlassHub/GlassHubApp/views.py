@@ -45,24 +45,23 @@ def registro(request):
 
 @login_required
 def dashbord(request):
-    # Gerar gráficos
-    grafico1 = pyo.plot(graficos1.fig, output_type='div')
-    grafico2 = pyo.plot(graficos2.fig, output_type='div')
-    grafico3 = pyo.plot(graficos3.fig, output_type='div')
-    grafico4 = pyo.plot(graficos4.fig, output_type='div')
-    grafico5 = pyo.plot(graficos5.fig, output_type='div')
-    grafico6 = pyo.plot(graficos6.fig, output_type='div')
-    grafico7 = pyo.plot(graficos7.fig, output_type='div')  # Adicione esta linha
+    # Create graphs
+    graph1_html = graficos1.criar_grafico()
+    graph2_html = graficos2.criar_grafico()
+    graph3_html = graficos3.criar_grafico()
+    graph4_html = graficos4.criar_grafico_bolhas()
+    graph5_html = graficos5.criar_grafico_barras()
+    graph6_html = graficos6.criar_treemap()
+    graph7_html = graficos7.criar_grafico_barras_empilhadas()
     
-    # Passar os gráficos para o template
     context = {
-        'grafico1': grafico1,
-        'grafico2': grafico2,
-        'grafico3': grafico3,
-        'grafico4': grafico4,
-        'grafico5': grafico5,
-        'grafico6': grafico6,
-        'grafico7': grafico7,  # Adicione esta linha
+        'graph1': graph1_html,
+        'graph2': graph2_html,
+        'graph3': graph3_html,
+        'graph4': graph4_html,
+        'graph5': graph5_html,
+        'graph6': graph6_html,
+        'graph7': graph7_html,
     }
     
     return render(request, 'dashbord.html', context)
@@ -107,3 +106,6 @@ def faturamento(request):
 def parametrizacao(request):
     return render(request, 'parametrizacao.html')
 
+@login_required
+def temp_plot_view(request):
+    return HttpResponse("A página temp-plot está desativada.")
