@@ -7,7 +7,7 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import CustomUser
-from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6
+from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6, graficos7
 import plotly.offline as pyo
 
 # Create your views here.
@@ -52,6 +52,7 @@ def dashbord(request):
     grafico4 = pyo.plot(graficos4.fig, output_type='div')
     grafico5 = pyo.plot(graficos5.fig, output_type='div')
     grafico6 = pyo.plot(graficos6.fig, output_type='div')
+    grafico7 = pyo.plot(graficos7.fig, output_type='div')  # Adicione esta linha
     
     # Passar os gráficos para o template
     context = {
@@ -61,9 +62,12 @@ def dashbord(request):
         'grafico4': grafico4,
         'grafico5': grafico5,
         'grafico6': grafico6,
+        'grafico7': grafico7,  # Adicione esta linha
     }
     
     return render(request, 'dashbord.html', context)
+
+
 
 def login(request):
     if request.method == "GET":

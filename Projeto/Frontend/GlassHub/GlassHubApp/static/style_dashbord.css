@@ -136,20 +136,26 @@ header {
     transition: margin-left 0.3s ease;
 }
 
-.top-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: calc(100% - 45px); 
-    height: 200px;
-    background-color: #E9E9E9E9;
-    margin: 0 0 20px 20px; 
+.dashboard-card {
+    background-color: #FFFFFF; /* Fundo branco */
+    border: 1px solid #BDBDBD; /* Borda cinza */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 10px; /* Padding reduzido */
+    margin: 10px 0; /* Margem reduzida */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 1113px; /* Largura fixa */
+    height: 200px; /* Altura fixa */
 }
 
-.banner-img {
-    max-width: calc(100% - 45px); 
-    height: auto; 
+.dashboard-card h3 {
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
 }
+
+.dashboard-card p {
+    font-size: 14px; /* Tamanho da fonte do texto */
+    color: #333; /* Cor do texto */
+}
+
 
 /* Grid layout */
 .grid-container {

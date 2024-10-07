@@ -26,9 +26,9 @@
         <!-- Conteúdo principal -->
         <section class="main-content" id="mainContent">
             <div class="top-banner">
-                <img src="{% static 'banner.png' %}" alt="Banner" class="banner-img">
+                {{ grafico7|safe }}
             </div>
-
+            
             <div class="grid-container">
                 <div class="grid-item">
                     {{ grafico1|safe }}
