@@ -7,7 +7,7 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import CustomUser
-from .utils import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6
+from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6
 import plotly.offline as pyo
 
 # Create your views here.
