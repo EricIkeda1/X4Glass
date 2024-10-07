@@ -7,6 +7,8 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import CustomUser
+from .utils import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6
+import plotly.offline as pyo
 
 # Create your views here.
 @login_required
@@ -43,26 +45,42 @@ def registro(request):
 
 @login_required
 def dashbord(request):
-    return render(request, 'dashbord.html')
+    # Gerar gráficos
+    grafico1 = pyo.plot(graficos1.fig, output_type='div')
+    grafico2 = pyo.plot(graficos2.fig, output_type='div')
+    grafico3 = pyo.plot(graficos3.fig, output_type='div')
+    grafico4 = pyo.plot(graficos4.fig, output_type='div')
+    grafico5 = pyo.plot(graficos5.fig, output_type='div')
+    grafico6 = pyo.plot(graficos6.fig, output_type='div')
+    
+    # Passar os gráficos para o template
+    context = {
+        'grafico1': grafico1,
+        'grafico2': grafico2,
+        'grafico3': grafico3,
+        'grafico4': grafico4,
+        'grafico5': grafico5,
+        'grafico6': grafico6,
+    }
+    
+    return render(request, 'dashbord.html', context)
 
 def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
     else:
-        username = request.POST.get('username')  # Obtém o nome de usuário
-        email = request.POST.get('email')        # Obtém o e-mail
-        password = request.POST.get('password')   # Obtém a senha
-
-        # Tenta autenticar usando o nome de usuário
+        username = request.POST.get('username')  
+        email = request.POST.get('email')     
+        password = request.POST.get('password')   
+        
         user = authenticate(username=username, password=password)
 
-        # Se a autenticação falhar, tenta autenticar usando o e-mail
         if not user:
             try:
-                user = CustomUser.objects.get(email=email)  # Tenta encontrar o usuário pelo e-mail
-                user = authenticate(username=user.username, password=password)  # Autentica com o nome de usuário
+                user = CustomUser.objects.get(email=email)  
+                user = authenticate(username=user.username, password=password) 
             except CustomUser.DoesNotExist:
-                user = None  # Se o usuário não existir, define como None
+                user = None  
 
         if user:
             login_django(request, user)
@@ -74,7 +92,7 @@ def login(request):
             return render(request, 'login.html')
         
 def logout_view(request):
-    logout(request)  # Desloga o usuário
+    logout(request)  
     return redirect('login')
         
 @login_required        
