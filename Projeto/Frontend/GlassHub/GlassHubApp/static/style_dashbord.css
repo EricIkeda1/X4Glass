@@ -160,8 +160,9 @@ header {
 /* Grid layout */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-    grid-gap: 5px; /* Diminui o espaçamento geral entre as linhas e colunas */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px;
 }
 
 .grid-item {
@@ -197,11 +198,3 @@ header {
     font-size: 14px; 
     color: #333; 
 }
-
-.small-graph {
-    transform: scale(0.99, 0.7) translateY(-16%); /* Move o gráfico para cima 5% */
-    transform-origin: top left; /* Altera a origem da transformação */
-    margin-left: -5px; /* Ajusta a margem esquerda */
-    margin-bottom: 1px; /* Diminui o espaçamento entre os gráficos 1, 2, 3 e 4, 5, 6 */
-}
-
