@@ -39,7 +39,7 @@ def pdf_process_function(msg):
     return
 
 # Acessa a variável de ambiente CLOUDAMQP_URL ou utiliza localhost
-url = os.environ.get('CLOUDAMQP_URL', 'amqps://ocykppqu:W8H4XXAHlsjWg_0LpD3lLE_hd-0ZCNWi@prawn.rmq.cloudamqp.com/ocykppqu')
+url = os.environ.get('CLOUDAMQP_URL', '')
 params = pika.URLParameters(url)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()  # Inicia um canal
