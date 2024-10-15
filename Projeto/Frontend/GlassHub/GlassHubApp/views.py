@@ -9,6 +9,9 @@ from django.contrib.auth import logout
 from .models import CustomUser
 from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6, graficos7
 import plotly.offline as pyo
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 @login_required
@@ -43,30 +46,45 @@ def registro(request):
 
         return HttpResponse(f'Usuário {username} cadastrado com sucesso')
 
+# View para receber dados do processador de eventos
+@csrf_exempt
+def update_dashbord_data(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            # Você pode salvar esses dados em uma variável de sessão ou cache, conforme necessário
+            request.session['dash_data'] = data
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    return JsonResponse({'status': 'invalid request'}, status=400)
+
 @login_required
 def dashbord(request):
-    # Create graphs
-    graph1_html = graficos1.criar_grafico()
-    graph2_html = graficos2.criar_grafico()
-    graph3_html = graficos3.criar_grafico()
-    graph4_html = graficos4.criar_grafico_bolhas()
-    graph5_html = graficos5.criar_grafico_barras()
-    graph6_html = graficos6.criar_treemap()
-    graph7_html = graficos7.criar_grafico_barras_empilhadas()
+    # Tentar carregar os dados da sessão
+    data = request.session.get('dash_data', None)
     
+    # Se não houver dados, definir valores fictícios
+    if not data:
+        data = {
+            "sector": "SIMULADO",
+            "product": "PORTA CORRER AZUL 8MM TEMPERADO",
+            "date": "2024-10-08 23:35:12",
+            "max_idle": 3600
+        }
+
     context = {
-        'graph1': graph1_html,
-        'graph2': graph2_html,
-        'graph3': graph3_html,
-        'graph4': graph4_html,
-        'graph5': graph5_html,
-        'graph6': graph6_html,
-        'graph7': graph7_html,
+        'data': data,  # Dados para o dashboard
+        'graph1': graficos1.criar_grafico(),
+        'graph2': graficos2.criar_grafico(),
+        'graph3': graficos3.criar_grafico(),
+        'graph4': graficos4.criar_grafico_bolhas(),
+        'graph5': graficos5.criar_grafico_barras(),
+        'graph6': graficos6.criar_treemap(),
+        'graph7': graficos7.criar_grafico_barras_empilhadas(),
     }
-    
+
     return render(request, 'dashbord.html', context)
-
-
 
 def login(request):
     if request.method == "GET":

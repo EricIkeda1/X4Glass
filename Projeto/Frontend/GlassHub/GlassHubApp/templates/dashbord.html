@@ -24,7 +24,17 @@
 
         <section class="dashbord-section">
             <h1>Dashbord</h1>
-
+    
+            <!-- Exibição dos dados recebidos -->
+            <div class="data-display">
+                <p>Setor: {{ data.sector }}</p>
+                <p>Produto: {{ data.product }}</p>
+                <p>Data: {{ data.date }}</p>
+                {% if data.max_idle %}
+                    <p>Tempo ocioso máximo: {{ data.max_idle }} segundos</p>
+                {% endif %}
+            </div>
+    
             <!-- Conteúdo principal -->
             <section class="main-content" id="mainContent">
                 <div>
@@ -57,7 +67,7 @@
                     </div>
                 </div>
             </section>
-
+            
         <!-- Menu lateral -->
         <nav class="slider-menu" id="sliderMenu">
             <ul>
