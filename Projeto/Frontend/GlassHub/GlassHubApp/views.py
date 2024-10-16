@@ -67,10 +67,10 @@ def dashbord(request):
     # Se não houver dados, definir valores fictícios
     if not data:
         data = {
-            "sector": "SIMULADO",
-            "product": "PORTA CORRER AZUL 8MM TEMPERADO",
-            "date": "2024-10-08 23:35:12",
-            "max_idle": 3600
+            "sector": "Sem valor",
+            "product": "Sem valor",
+            "date": "Sem valor",
+            "max_idle": "Sem valor"
         }
 
     context = {
@@ -124,6 +124,3 @@ def faturamento(request):
 def parametrizacao(request):
     return render(request, 'parametrizacao.html')
 
-@login_required
-def temp_plot_view(request):
-    return HttpResponse("A página temp-plot está desativada.")
