@@ -1,73 +1,99 @@
-    {% load static %}
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Temperlândia | Dashbord</title>
-        <link rel="stylesheet" href="{% static 'style_dashbord.css' %}">
-        <link rel="icon" type="image/png" href="{% static 'favoicon.png'%}">
-        <link rel="icon" type="image/png" href="http://www.temperlandia.com.br/images/favicon.png">
-    </head>
-    <body>
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperlândia | Dashbord</title>
+    <link rel="stylesheet" href="{% static 'style_dashbord.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'favoicon.png'%}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
 
-        <!-- Cabeçalho -->
-        <header>
-            <div class="menu-icon">
-                <button class="menu-toggle" onclick="toggleMenu()">&#9776; Opções</button>
-            </div>
-            <div id="dateTime" class="date-time"></div> 
-            <div class="logo">
-                <img src="{% static 'images/Logo Temperlandia.png' %}" alt="Temperlândia">
-            </div>
-        </header>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="menu-icon">
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776; Opções</button>
+        </div>
+        <div id="dateTime" class="date-time"></div> 
+        <div class="logo">
+            <img src="{% static 'images/Logo Temperlandia.png' %}" alt="Temperlândia">
+        </div>
+    </header>
 
-        <section class="dashbord-section">
-            <h1>Dashbord</h1>
-    
-            <!-- Exibição dos dados recebidos -->
-            <div class="data-display">
-                <p>Setor: {{ data.sector }}</p>
-                <p>Produto: {{ data.product }}</p>
-                <p>Data: {{ data.date }}</p>
-                {% if data.max_idle %}
-                    <p>Tempo ocioso máximo: {{ data.max_idle }} segundos</p>
-                {% endif %}
-            </div>
-    
-            <!-- Conteúdo principal -->
-            <section class="main-content" id="mainContent">
-                <div>
-                    {{ graph7|safe }}
+    <section class="dashbord-section">
+        <h1>Dashbord</h1>
+
+        <!-- Exibição dos dados recebidos -->
+        <div class="data-display">
+            {% for evento in eventos %}
+                <div class="evento">
+                    <p>Setor: {{ evento.sector }}</p>
+                    <p>Produto: {{ evento.product }}</p>
+                    <p>Data: {{ evento.date }}</p>
+                    {% if evento.max_idle %}
+                        <p>Tempo ocioso máximo: {{ evento.max_idle }} segundos</p>
+                    {% endif %}
                 </div>
-                
-                <div class="grid-container">
-                    <div>
-                        {{ graph1|safe }}
-                    </div>
+            {% endfor %}
+        </div>
+
+        <!-- Conteúdo principal -->
+        <section class="main-content" id="mainContent">
+            <div>
+                {{ graph7|safe }}
+            </div>
+
+            <div class="grid-container">
+                <div id="graph1"></div>  <!-- Elemento para o gráfico de eventos -->
+                <script>
+                    const eventos = {{ eventos|safe }};  // Passando dados de eventos para JavaScript
+                        
+                    const dataEventos = eventos.map(evento => evento.date);
+                    const valorEventos = eventos.map(evento => evento.max_idle || 0); // Usando max_idle ou 0 se não existir
+
+                    // Supondo que graph1 é um gráfico de barras
+                    const graph1Element = document.getElementById('graph1');
+                    const data = [{
+                        x: dataEventos,  // datas dos eventos
+                        y: valorEventos, // valores dos eventos (max_idle)
+                        type: 'bar',
+                        name: 'Eventos',
+                        marker: { color: 'red' }
+                    }];
                     
-                    <div>
-                        {{ graph2|safe }}
-                    </div>
+                    const layout = {
+                        title: 'Eventos',
+                        xaxis: { title: 'Data' },
+                        yaxis: { title: 'Valor (Max Idle em Segundos)' }
+                    };
+
+                    Plotly.newPlot(graph1Element, data, layout);
+                </script>
+            </div>
+
+            <div>
+                {{ graph2|safe }}
+            </div>
                 
-                    <div>
-                        {{ graph3|safe }}
-                    </div>
+            <div>
+                {{ graph3|safe }}
+            </div>
                 
-                    <div>
-                        {{ graph4|safe }}
-                    </div>
+            <div>
+                {{ graph4|safe }}
+            </div>
                 
-                    <div>
-                        {{ graph5|safe }}
-                    </div>
+            <div>
+                {{ graph5|safe }}
+            </div>
                 
-                    <div>
-                        {{ graph6|safe }}
-                    </div>
-                </div>
-            </section>
-            
+            <div>
+                {{ graph6|safe }}
+            </div>
+        </section>
+
         <!-- Menu lateral -->
         <nav class="slider-menu" id="sliderMenu">
             <ul>
@@ -111,4 +137,4 @@
             updateDateTime(); 
         </script>
     </body>
-    </html>
+</html>
