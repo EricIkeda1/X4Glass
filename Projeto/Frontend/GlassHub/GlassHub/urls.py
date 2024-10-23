@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from GlassHubApp import views
+from GlassHubApp import consumers 
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,3 +33,4 @@ urlpatterns = [
     path('parametrizacao/', views.parametrizacao, name='parametrizacao'),
     path('logout/', views.logout_view, name='logout'),
 ]
+

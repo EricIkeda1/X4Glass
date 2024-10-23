@@ -17,6 +17,7 @@ import json
 @login_required
 def monitoramento(request):
     return render(request, 'monitoramento.html')
+
 @login_required
 def alarmes(request):
     context = {
@@ -46,17 +47,8 @@ def registro(request):
 
         return HttpResponse(f'Usuário {username} cadastrado com sucesso')
 
-def obter_dados_eventos():
-    # Exemplo de dados de eventos no formato especificado.
-    return [
-        {'sector': 'LAPIDAÇÃO', 'product': 'PORTA CORRER VERDE 10MM TEMPERADO', 'date': '2024-10-08 23:33:49.458547+00:00'},
-        {'sector': 'LAPIDAÇÃO', 'product': 'PORTA CORRER VERDE 10MM TEMPERADO', 'date': '2024-10-08 23:35:12.790716+00:00', 'max_idle': 3600},
-    ]
-
 @login_required
 def dashbord(request):
-    eventos = obter_dados_eventos()  # Coletando dados de eventos
-
     context = {
         'graph1': graficos1.criar_grafico(),
         'graph2': graficos2.criar_grafico(),
@@ -65,7 +57,7 @@ def dashbord(request):
         'graph5': graficos5.criar_grafico_barras(),
         'graph6': graficos6.criar_treemap(),
         'graph7': graficos7.criar_grafico_barras_empilhadas(),
-        'eventos': eventos,
+        'eventos': []
     }
     
     return render(request, 'dashbord.html', context)

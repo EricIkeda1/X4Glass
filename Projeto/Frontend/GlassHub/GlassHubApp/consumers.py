@@ -1,20 +1,18 @@
 import json
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
-class EventConsumer(WebsocketConsumer):
-    def connect(self):
-        self.accept() 
+class EventConsumer(AsyncJsonWebsocketConsumer):
+    async def connect(self):
+        await self.accept() 
         
-    def disconnect(self, close_code):
-        pass 
+    async def disconnect(self, close_code):
+        pass
 
-    def receive(self, text_data):
+    async def receive(self, text_data):
         event_data = json.loads(text_data)
+        await self.process_event(event_data)
 
-        # Processa o evento recebido
-        self.process_event(event_data)
-
-    def process_event(self, event_data):
+    async def process_event(self, event_data):
         formatted_event = {
             'sector': event_data.get('sector'),
             'product': event_data.get('product'),
@@ -22,6 +20,5 @@ class EventConsumer(WebsocketConsumer):
             'max_idle': event_data.get('max_idle', None) 
         }
 
-        self.send(text_data=json.dumps({
-            'message': formatted_event
-        }))
+        await self.send(text_data=json.dumps(formatted_event))
+

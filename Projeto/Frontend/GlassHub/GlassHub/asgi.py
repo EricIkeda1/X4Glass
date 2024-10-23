@@ -12,15 +12,17 @@ from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from django.urls import path
-from GlassHubApp.consumers import EventConsumer  # Importe o Consumer correto
+from .routing import websocket_urlpatterns
+from GlassHubApp.broker import PikaConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'GlassHub.settings')  # Certifique-se de usar o nome correto do projeto
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
-        URLRouter([
-            path("ws/eventos/", EventConsumer.as_asgi()),  # Configuração do WebSocket
-        ])
+        URLRouter(websocket_urlpatterns)
     ),
 })
+
+consumer = PikaConsumer(queue_name='eventos_queue')
+consumer.start()
