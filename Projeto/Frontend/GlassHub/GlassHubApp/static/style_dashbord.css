@@ -120,7 +120,7 @@ header {
 
 .dashbord-section {
     padding: 20px;
-    width: 100vh;
+    height: 100vh;
     overflow: auto;
 }
 

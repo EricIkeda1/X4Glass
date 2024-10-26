@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 ASGI_APPLICATION = 'GlassHub.asgi.application'  # Certifica-te de que o caminho está correto
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Application definition
 

@@ -13,22 +13,27 @@ class PikaConsumer:
         self.thread.start()
 
     def run(self):
+        import asyncio 
+        loop = asyncio.new_event_loop()
+
         params = pika.URLParameters('')
         self.connection = pika.BlockingConnection(params)
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=self.queue_name, durable=True)
-        self.channel.basic_consume(queue=self.queue_name, on_message_callback=self.callback, auto_ack=True)
+        self.channel.basic_consume(queue=self.queue_name, on_message_callback=lambda ch, method, properties, body: loop.run_until_complete(self._callback(ch, method, properties, body)), auto_ack=True)
 
         print(f"[*] Aguardando mensagens na fila '{self.queue_name}'. Para sair pressione CTRL+C")
         self.channel.start_consuming()
 
-    def callback(self, ch, method, properties, body):
-        import websocket
+    async def _callback(self, ch, method, properties, body):
+        import websockets
 
-        uri = "ws://localhost:8000/ws/eventos/"
-        socket = websocket.create_connection(uri)
-        socket.send_text(body.decode('utf-8'))
-        socket.close()
+        try:
+            uri = "ws://localhost:8000/ws/eventos/"
+            server = await websockets.connect(uri)
+            await server.send(body.decode('utf-8'))
+        except Exception as e:
+            print(e)
 
     def stop(self):
         if self.connection:

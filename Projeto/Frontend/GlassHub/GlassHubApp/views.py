@@ -60,7 +60,11 @@ def dashbord(request):
         'eventos': []
     }
     
-    return render(request, 'dashbord.html', context)
+    response = render(request, 'dashboard.html', context)
+
+    response['Cache-Control'] = 'no-cache'
+
+    return response
     
 def login(request):
     if request.method == "GET":

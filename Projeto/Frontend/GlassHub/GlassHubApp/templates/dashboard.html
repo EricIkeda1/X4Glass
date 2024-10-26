@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperlândia | Dashbord</title>
+    <link rel="stylesheet" href="{% static 'style_dashbord.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'favoicon.png'%}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="menu-icon">
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776; Opções</button>
+        </div>
+        <div id="dateTime" class="date-time"></div> 
+        <div class="logo">
+            <img src="{% static 'images/Logo Temperlandia.png' %}" alt="Temperlândia">
+        </div>
+    </header>
+
+    <section class="dashbord-section">
+        <h1>Dashbord</h1>
+
+        <!-- Exibição dos dados recebidos -->
+        <div id="logs" class="data-display"></div>
+
+        <!-- Conteúdo principal -->
+        <section class="main-content" id="mainContent">
+            <div>
+                {{ graph7|safe }}
+            </div>
+
+            <div class="grid-container">
+                <div style="max-width: 100%; max-height: 100%;">
+                    <div id="graph1"></div>
+                </div>
+                <script>
+                    const dataEventos = []
+                    const valorEventos = []
+                    const socket = new WebSocket('ws://localhost:8000/ws/eventos/');
+
+                    socket.onopen = function() {
+                        renderEventsChart()
+                    }
+
+                    socket.onerror = console.error
+
+                    socket.onmessage = function({data}) {
+                        data = JSON.parse(data)
+                        dataEventos.push(data.date);
+                        valorEventos.push(data.max_idle || 0);
+                        renderEventsChart()
+                    }
+
+                    function renderEventsChart() {
+                        const graph1Element = document.getElementById('graph1');
+                        const data = [{
+                            x: dataEventos,  // datas dos eventos
+                            y: valorEventos, // valores dos eventos (max_idle)
+                            type: 'bar',
+                            name: 'Eventos',
+                            marker: { color: 'red' }
+                        }];
+                    
+                        const layout = {
+                            title: 'Eventos',
+                            xaxis: { title: 'Data' },
+                            yaxis: { title: 'Valor (Max Idle em Segundos)' },
+                            width: "1000",
+                            height: "500"
+                        };
+
+                        Plotly.newPlot(graph1Element, data, layout);
+                    }
+                </script>
+            </div>
+
+            <div>
+                {{ graph2|safe }}
+            </div>
+                
+            <div>
+                {{ graph3|safe }}
+            </div>
+                
+            <div>
+                {{ graph4|safe }}
+            </div>
+                
+            <div>
+                {{ graph5|safe }}
+            </div>
+                
+            <div>
+                {{ graph6|safe }}
+            </div>
+        </section>
+
+        <!-- Menu lateral -->
+        <nav class="slider-menu" id="sliderMenu">
+            <ul>
+                <li><a href="{% url 'alarmes' %}">Alarmes</a></li>
+                <li><a href="{% url 'dashbord' %}">Dashbord</a></li>
+                <li><a href="{% url 'faturamento' %}">Faturamento</a></li>
+                <li><a href="{% url 'monitoramento' %}">Monitoramento</a></li>
+                <li><a href="{% url 'parametrizacao' %}">Parametrização</a></li>
+                <li><a href="{% url 'logout' %}">Sair</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const sliderMenu = document.getElementById("sliderMenu");
+                const mainContent = document.getElementById("mainContent");
+
+                sliderMenu.classList.toggle("open");
+
+                if (sliderMenu.classList.contains("open")) {
+                    mainContent.style.marginLeft = "200px";
+                } else {
+                    mainContent.style.marginLeft = "0";
+                }
+            }
+
+            function updateDateTime() {
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const year = now.getFullYear();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                
+                const dateTimeString = `Data: ${day}/${month}/${year} Hora: ${hours}:${minutes}:${seconds}`;
+                document.getElementById("dateTime").innerText = dateTimeString;
+            }
+
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+        </script>
+    </body>
+</html>
