@@ -11,7 +11,12 @@ from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, gra
 import plotly.offline as pyo
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+from json import loads, dumps
+from .models import eventos
+from asgiref.sync import sync_to_async
+from channels.generic.websocket import AsyncWebsocketConsumer
+
+
 
 # Create your views here.
 @login_required
@@ -49,19 +54,32 @@ def registro(request):
 
 @login_required
 def dashbord(request):
-    context = {
-        'graph1': graficos1.criar_grafico(),
-        'graph2': graficos2.criar_grafico(),
-        'graph3': graficos3.criar_grafico(),
-        'graph4': graficos4.criar_grafico_bolhas(),
-        'graph5': graficos5.criar_grafico_barras(),
-        'graph6': graficos6.criar_treemap(),
-        'graph7': graficos7.criar_grafico_barras_empilhadas(),
-        'eventos': []
-    }
-    
-    response = render(request, 'dashboard.html', context)
+    # Obter todos os eventos do banco de dados
+    all_eventos = eventos.objects.all()
 
+    # Criar os gráficos
+    graph1 = graficos1.criar_grafico()
+    graph2 = graficos2.criar_grafico()
+    graph3 = graficos3.criar_grafico()
+    graph4 = graficos4.criar_grafico_bolhas()
+    graph5 = graficos5.criar_grafico_barras()
+    graph6 = graficos6.criar_treemap()
+    graph7 = graficos7.criar_grafico_barras_empilhadas()
+
+    # Preparar o contexto
+    context = {
+        'graph1': graph1,
+        'graph2': graph2,
+        'graph3': graph3,
+        'graph4': graph4,
+        'graph5': graph5,
+        'graph6': graph6,
+        'graph7': graph7,
+        'eventos': all_eventos,
+    }
+
+    # Renderizar a resposta com o contexto
+    response = render(request, 'dashboard.html', context)
     response['Cache-Control'] = 'no-cache'
 
     return response
@@ -103,4 +121,53 @@ def faturamento(request):
 @login_required
 def parametrizacao(request):
     return render(request, 'parametrizacao.html')
+
+class EventConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        self.group_name = "temperlandia"
+        await self.channel_layer.group_add(self.group_name, self.channel_name)
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+
+    async def receive(self, text_data):
+        data = loads(text_data)
+        
+        # Salva o evento no banco de dados SQLite
+        await self.save_event(data)
+
+        await self.channel_layer.group_send(
+            self.group_name,
+            {
+                'type': 'send_message',
+                'message': data
+            }
+        )
+
+    async def send_message(self, event):
+        message = event['message']
+        await self.send(text_data=dumps(message))
+
+    @sync_to_async
+    def save_event(self, data):
+        # Aqui você salva os dados no SQLite, com base nos campos fornecidos
+        eventos.objects.create(
+            name=data.get("name"),
+            width=data.get("width"),
+            height=data.get("height"),
+            code=data.get("code"),
+            order_id=data.get("order_id")
+        )
+        
+def dashbord_view(request):
+    # Buscando todos os eventos do banco de dados
+    eventos_data = eventos.objects.all()
+    
+    # Processando os dados para gráficos
+    data = {
+        'eventos': eventos_data
+    }
+
+    return render(request, 'dashbord.html', data)
 
