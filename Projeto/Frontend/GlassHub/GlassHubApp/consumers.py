@@ -1,4 +1,5 @@
 # consumer.py
+
 from channels.generic.websocket import AsyncWebsocketConsumer
 from json import loads, dumps
 from .models import eventos  
@@ -33,5 +34,11 @@ class EventConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def save_event(self, data):
-        # Aqui você salva os dados no SQLite
-        eventos.objects.create(nome=data.get("nome"), descricao=data.get("descricao"))
+        # Salva os dados de evento no SQLite
+        eventos.objects.create(
+            name=data.get("name"),
+            width=data.get("width"),
+            height=data.get("height"),
+            code=data.get("code"),
+            order_id=data.get("order_id")
+        )

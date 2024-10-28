@@ -15,8 +15,7 @@ from json import loads, dumps
 from .models import eventos
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
-
-
+from .models import eventos
 
 # Create your views here.
 @login_required
@@ -149,8 +148,8 @@ class EventConsumer(AsyncWebsocketConsumer):
         message = event['message']
         await self.send(text_data=dumps(message))
 
-    @sync_to_async
-    def save_event(self, data):
+@sync_to_async
+def save_event(self, data):
         # Aqui você salva os dados no SQLite, com base nos campos fornecidos
         eventos.objects.create(
             name=data.get("name"),
@@ -171,3 +170,6 @@ def dashbord_view(request):
 
     return render(request, 'dashbord.html', data)
 
+def api_eventos(request):
+    eventos_data = list(eventos.objects.values())
+    return JsonResponse(eventos_data, safe=False)

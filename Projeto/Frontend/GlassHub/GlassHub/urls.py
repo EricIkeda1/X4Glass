@@ -32,5 +32,7 @@ urlpatterns = [
     path('faturamento/', views.faturamento, name='faturamento'),
     path('parametrizacao/', views.parametrizacao, name='parametrizacao'),
     path('logout/', views.logout_view, name='logout'),
+    path('api/eventos/', views.api_eventos, name='api_eventos'),
+
 ]
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'style_dashbord.css' %}">
     <link rel="icon" type="image/png" href="{% static 'favoicon.png'%}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="icon" type="image/png" href="http://www.temperlandia.com.br/images/favicon.png">
 </head>
 <body>
 
@@ -56,11 +57,31 @@
                         renderEventsChart()
                     }
 
+                    async function carregarDados() {
+                        try {
+                            const response = await fetch('/api/eventos/');  // Endpoint para retornar dados do banco de dados
+                            const data = await response.json();
+                
+                            dataEventos.length = 0;  // Limpa os arrays
+                            valorEventos.length = 0;
+                
+                            data.forEach(event => {
+                                dataEventos.push(event.date);
+                                valorEventos.push(event.max_idle || 0);
+                            });
+                
+                            renderEventsChart();
+                        } catch (error) {
+                            console.error('Erro ao carregar dados:', error);
+                        }
+                    }
+                
+                    // Função para atualizar o gráfico com dados do WebSocket
                     function renderEventsChart() {
                         const graph1Element = document.getElementById('graph1');
                         const data = [{
-                            x: dataEventos,  // datas dos eventos
-                            y: valorEventos, // valores dos eventos (max_idle)
+                            x: dataEventos,
+                            y: valorEventos,
                             type: 'bar',
                             name: 'Eventos',
                             marker: { color: 'red' }
@@ -73,9 +94,12 @@
                             width: "1000",
                             height: "500"
                         };
-
+                
                         Plotly.newPlot(graph1Element, data, layout);
                     }
+                
+                    // Chama a função para carregar dados ao iniciar
+                    carregarDados();
                 </script>
             </div>
 
