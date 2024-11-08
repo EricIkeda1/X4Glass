@@ -61,18 +61,18 @@ header {
 .slider-menu {
     position: fixed;
     top: 68px;
-    left: -200px;
+    left: -200px; /* Posição inicial oculta */
     width: 200px;
     height: 100%;
     background-color: #FFB41C;
-    transition: left 0.3s ease;
+    transition: left 0.3s ease; /* Animação suave */
     align-items: center; 
     justify-content: center;
     overflow: hidden; 
 }
 
 .slider-menu.open {
-    left: 0;
+    left: 0; /* Exibe o menu ao aplicar a classe 'open' */
 }
 
 .slider-menu ul {
@@ -95,9 +95,6 @@ header {
     border-radius: 5px; 
     font-size: 14px; 
     margin-bottom: 10px; 
-    color: #FFFFFF;
-    justify-content: center; 
-    align-items: center;
     text-align: center; 
 }
 
@@ -118,6 +115,16 @@ header {
     width: 100%; 
 }
 
+/* Conteúdo principal */
+.main-content {
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Adiciona transição para o conteúdo principal */
+}
+
+.main-content.shifted {
+    margin-left: 200px; /* Ajusta o deslocamento quando o menu está aberto */
+}
+
 .dashbord-section {
     padding: 20px;
     height: 100vh;
@@ -132,21 +139,47 @@ header {
     margin-bottom: 30px;
 }
 
-
-/* Grid layout */
+/* Grid layout atualizado */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: 1fr; /* Inicialmente uma coluna para o gráfico maior */
+    grid-template-rows: auto auto auto;
+    gap: 20px;
     padding: 20px;
 }
 
+/* Estilo para o primeiro item grande */
+.grid-container .grid-item:nth-child(1) {
+    grid-column: 1 / -1; /* Ocupa toda a largura */
+    height: 350px; /* Altura maior para o gráfico grande */
+}
+
+/* Estilo para os próximos gráficos menores */
+.grid-container .grid-item:nth-child(2),
+.grid-container .grid-item:nth-child(3),
+.grid-container .grid-item:nth-child(4),
+.grid-container .grid-item:nth-child(5),
+.grid-container .grid-item:nth-child(6),
+.grid-container .grid-item:nth-child(7),
+.grid-container .grid-item:nth-child(8),
+.grid-container .grid-item:nth-child(9) {
+    grid-column: auto;
+    height: 300px; /* Altura padrão para os gráficos menores */
+}
+
+/* Disposição dos gráficos menores em uma grade 3x3 abaixo do primeiro gráfico */
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Altera para três colunas a partir de telas maiores */
+        grid-template-rows: auto; /* Ajusta automaticamente as linhas */
+    }
+}
+
 .grid-item {
-    background-color: #E9E9E9E9;
+    background-color: #E9E9E9;
     border: 1px solid #BDBDBD;
     border-radius: 8px;
-    padding: 10px; /* Reduzido para mover os gráficos mais para cima */
-    height: 300px; /* Aumentar a altura dos cartões */
+    padding: 10px;
     overflow: hidden;
     display: flex;
     align-items: flex-start; /* Move o conteúdo para o topo */
