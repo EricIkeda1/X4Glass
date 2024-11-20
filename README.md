@@ -23,4 +23,4 @@ A integração e análise desses dados visam:
 - Reduzir defeitos;
 - Melhorar a qualidade do produto final.
 
-Como resultado, espera-se uma maior satisfação do cliente. Este estudo pretende fornecer uma base para futuras melhorias e inovações na gestão do beneficiamento de vidros, alinhando-se com as melhores práticas e tecnologias emergentes no setor.
+Como resultado, espera-se uma maior satisfação do cliente. Este estudo pretende fornecer uma base para futuras melhorias e inovações na gestão do beneficiamento de vidros, alinhando-se com as melhores práticas e tecnologias no setor.
