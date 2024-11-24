@@ -16,6 +16,7 @@ from .models import eventos
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import eventos
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 @login_required
@@ -32,24 +33,6 @@ def alarmes(request):
 @login_required
 def cadastro(request):
     return render(request, 'cadastro.html')
-
-def registro(request):
-    if request.method == "GET":
-        return render(request, 'registro.html')  
-    else:
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha') 
-
-        # Check if the user already exists
-        if User.objects.filter(username=username).exists():
-            return HttpResponse('Já existe um usuário com esse nome')
-
-        # Create the user if it doesn't exist
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        user.save()
-
-        return HttpResponse(f'Usuário {username} cadastrado com sucesso')
 
 @login_required
 def dashbord(request):
@@ -82,6 +65,27 @@ def dashbord(request):
     response['Cache-Control'] = 'no-cache'
 
     return response
+
+def registro(request): 
+    if request.method == "GET":
+        return render(request, 'registro.html')  
+    else:
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        senha = request.POST.get('password')  # Nome correto do campo no formulário
+
+        # Verificar se o nome de usuário já existe
+        if User.objects.filter(username=username).exists():
+            return HttpResponse('Já existe um usuário com esse nome')
+
+        # Criptografando a senha antes de salvar
+        senha_criptografada = make_password(senha)
+
+        # Criar o usuário com a senha criptografada
+        user = User.objects.create(username=username, email=email, password=senha_criptografada)
+        user.save()
+
+        return HttpResponse(f'Usuário {username} cadastrado com sucesso')
     
 def login(request):
     if request.method == "GET":
@@ -89,29 +93,29 @@ def login(request):
     else:
         username = request.POST.get('username')  
         email = request.POST.get('email')     
-        password = request.POST.get('password')   
-        
-        user = authenticate(username=username, password=password)
+        password = request.POST.get('password')  # Nome correto do campo no formulário
 
+        # Tentar autenticar o usuário pelo nome de usuário
+        user = authenticate(request, username=username, password=password)
+
+        # Caso o usuário não seja encontrado pelo nome, tenta pelo e-mail
         if not user:
             try:
-                user = CustomUser.objects.get(email=email)  
-                user = authenticate(username=user.username, password=password) 
-            except CustomUser.DoesNotExist:
-                user = None  
+                user = User.objects.get(email=email)  # Busca o usuário pelo e-mail
+                user = authenticate(request, username=user.username, password=password)  # Tenta autenticar com o nome de usuário
+            except User.DoesNotExist:
+                user = None
 
         if user:
-            login_django(request, user)
-            print(f'User {username} logged in successfully.')
-            return redirect('dashbord')  
+            login_django(request, user)  # Realiza o login
+            return redirect('dashbord')  # Redireciona para o painel de controle
         else:
-            print('Invalid login attempt.')
-            messages.error(request, 'Nome, e-mail ou senha inválidos')
+            messages.error(request, 'Nome, e-mail ou senha inválidos')  # Mensagem de erro
             return render(request, 'login.html')
-        
+
 def logout_view(request):
-    logout(request)  
-    return redirect('login')
+    logout(request)  # Realiza o logout
+    return redirect('login')  # Redireciona para a página de login
         
 @login_required        
 def faturamento(request):
