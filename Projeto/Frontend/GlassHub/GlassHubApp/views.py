@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.hashers import make_password
 from .models import CustomUser
 from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6, graficos7
 import plotly.offline as pyo
@@ -16,7 +17,6 @@ from .models import eventos
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import eventos
-from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 @login_required
