@@ -11,8 +11,11 @@
 ```python manage.py runserver```
 - O servidor estará disponível em http://127.0.0.1:8000/.
 
-## Estrutura de Pastas
+### Explicação:
+- O **título "Onde rodar o comando"** deixa claro onde o usuário deve estar no sistema de arquivos para executar o comando.
+- **Estrutura de pastas**: A árvore mostra onde o arquivo `manage.py` está localizado e destaca que é a partir dessa pasta que o servidor deve ser iniciado.
 
+## Estrutura de Pastas
 ```bash
 GlassHub/
 │
