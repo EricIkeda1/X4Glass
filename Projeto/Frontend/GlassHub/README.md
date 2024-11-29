@@ -11,6 +11,9 @@
 ```python manage.py runserver```
 - O servidor estará disponível em http://127.0.0.1:8000/.
 
+## Estrutura de Pastas
+
+```bash
 GlassHub/
 │
 ├── GlassHub/                   # Configurações principais do projeto Django
