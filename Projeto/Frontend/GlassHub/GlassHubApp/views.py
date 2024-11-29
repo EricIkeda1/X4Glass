@@ -81,6 +81,9 @@ def registro(request):
         # Criptografando a senha antes de salvar
         senha_criptografada = make_password(senha)
 
+        # Depuração: Exibir o hash da senha gerada
+        print(f"Senha criptografada para depuração: {senha_criptografada}")
+
         # Criar o usuário com a senha criptografada
         user = User.objects.create(username=username, email=email, password=senha_criptografada)
         user.save()
@@ -121,8 +124,30 @@ def login(request):
         return render(request, 'login.html')
         
 def logout_view(request):
-    logout(request)  # Realiza o logout
-    return redirect('login')  # Redireciona para a página de login
+    # Depuração: antes de fazer logout, verificar se o usuário está autenticado
+    if request.user.is_authenticated:
+        print(f"Usuário {request.user.username} está se desconectando.")
+        
+        # Verificação adicional de senha antes do logout (não é comum, mas pode ser feito para depuração)
+        user = request.user
+        if check_password(user.password, user.password):  # Verificando a senha armazenada com a senha fornecida
+            print("Senha do usuário verificada com sucesso antes do logout.")
+        else:
+            print("Erro: A senha não corresponde ao hash armazenado.")
+    else:
+        print("Nenhum usuário autenticado para desconectar.")
+
+    # Realiza o logout
+    logout(request)
+
+    # Depuração: verificar se o logout foi bem-sucedido
+    if not request.user.is_authenticated:
+        print("Logout bem-sucedido. Nenhum usuário está mais autenticado.")
+    else:
+        print(f"Erro no logout. O usuário {request.user.username} ainda está autenticado.")
+    
+    # Redireciona para a página de login
+    return redirect('login')
         
 @login_required        
 def faturamento(request):
