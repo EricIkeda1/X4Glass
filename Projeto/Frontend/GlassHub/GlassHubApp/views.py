@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password, make_password
 from .models import CustomUser
 from .graficos import graficos1, graficos2, graficos3, graficos4, graficos5, graficos6, graficos7
 import plotly.offline as pyo
@@ -91,28 +91,35 @@ def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
     else:
-        username = request.POST.get('username')  
-        email = request.POST.get('email')     
-        password = request.POST.get('password')  # Nome correto do campo no formulário
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-        # Tentar autenticar o usuário pelo nome de usuário
-        user = authenticate(request, username=username, password=password)
-
-        # Caso o usuário não seja encontrado pelo nome, tenta pelo e-mail
-        if not user:
+        # Tentar encontrar o usuário pelo nome de usuário
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            # Caso o nome de usuário não exista, buscar pelo e-mail
             try:
-                user = User.objects.get(email=email)  # Busca o usuário pelo e-mail
-                user = authenticate(request, username=user.username, password=password)  # Tenta autenticar com o nome de usuário
+                user = User.objects.get(email=email)
             except User.DoesNotExist:
                 user = None
 
         if user:
-            login_django(request, user)  # Realiza o login
-            return redirect('dashbord')  # Redireciona para o painel de controle
-        else:
-            messages.error(request, 'Nome, e-mail ou senha inválidos')  # Mensagem de erro
-            return render(request, 'login.html')
+            hashed_password = make_password(password)
+            print(f"Hashed Password gerado para depuração: {hashed_password}")
 
+            # Verificar se a senha fornecida corresponde ao hash armazenado no banco de dados
+            if check_password(password, user.password):  # Verifica a senha fornecida com o hash armazenado
+                login_django(request, user)  # Realiza o login do usuário
+                return redirect('dashbord')  # Redireciona para o painel de controle
+            else:
+                messages.error(request, 'Senha incorreta')  # Se a senha não corresponder
+        else:
+            messages.error(request, 'Nome de usuário ou e-mail inválido')  # Se o usuário não for encontrado
+
+        return render(request, 'login.html')
+        
 def logout_view(request):
     logout(request)  # Realiza o logout
     return redirect('login')  # Redireciona para a página de login

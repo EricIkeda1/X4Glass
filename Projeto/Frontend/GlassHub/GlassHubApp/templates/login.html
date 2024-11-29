@@ -17,7 +17,7 @@
         </div>
         <div class="form-section">
             <h2>Faça seu Login</h2>
-            <form action="{% url 'login'%}" method="POST">{% csrf_token %}
+            <form action="{% url 'login'%}" method="POST"> {% csrf_token %}
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="username" id="username" name="username" required placeholder="Nome"> 
