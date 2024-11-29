@@ -131,8 +131,6 @@ def logout_view(request):
         user = request.user
         if check_password(user.password, user.password):  # Verificando a senha armazenada com a senha fornecida
             print("Senha do usuário verificada com sucesso antes do logout.")
-        else:
-            print("Erro: A senha não corresponde ao hash armazenado.")
     else:
         print("Nenhum usuário autenticado para desconectar.")
 
