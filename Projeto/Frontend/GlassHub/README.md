@@ -10,7 +10,7 @@
 ### Explicação:
 ## Onde executar os comandos:
 - Depois de configurar o superusuário, inicie o servidor de desenvolvimento do Django com o comando:
-- Para rodar o servidor, você deve estar na pasta principal do projeto (onde o arquivo ```manage.py``` está localizado). Esse é o diretório que contém a configuração principal do Django e onde o comando ```python manage.py runserver```  deve ser executado.
+- Para rodar o servidor, você deve estar na pasta principal do projeto (onde o arquivo ```manage.py``` está localizado). Esse é o diretório que contém a configuração principal do Django e onde o comando ```python manage.py runserver_plus --cert-file cert.pem --key-file key.pem```  deve ser executado.
 - **Estrutura de pastas**: A árvore mostra onde o arquivo ```manage.py```  está localizado e destaca que é a partir dessa pasta que o servidor deve ser iniciado.
 - O servidor estará disponível em http://127.0.0.1:8000/.
 

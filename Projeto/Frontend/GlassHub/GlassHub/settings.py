@@ -22,6 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^8_q5oz^4*1sgat#f875swedw$g&#^j#_tjtdbd!cl%w$kxi*a'
 
+# Habilitar o uso de cookies seguros
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Reforçar conexões HTTPS
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000  # 1 ano
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -46,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'GlassHubApp',
     'channels',
+    'django_extensions',
 ]
 
 PASSWORD_HASHERS = [
